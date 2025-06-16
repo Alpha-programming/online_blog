@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Profile
+
+{% endblock title %}
+
+{% block content %}
+<div class="row">
+    <div class="col-6">
+        <ul class="list-group">
+            <li class="list-group-item">Name: <b>{{ request.user.first_name }}</b></li>
+            <li class="list-group-item">Username: <b>{{ request.user.username }}</b></li>
+            <li class="list-group-item">Email: <b>{{ request.user.email }}</b></li>
+            <li class="list-group-item">Author ID: <b>{{ request.user.pk }}</b></li>
+            <li class="list-group-item">Date of registration: <b>{{ request.user.date_joined }}</b></li>
+            {% if api_token %}
+            <li class="list-group-item">API-Token: <b>{{ api_token }}</b></li>
+            {% else %}
+            <a href="{% url 'api' %}" class="btn btn-primary">Generate API Token</a>
+            {% endif %}
+        </ul>
+    </div>
+    <div class="col-6">
+        <ul class="list-group">
+            <li class="list-group-item">Likes: <b class=text-success>{{ total_likes }}</b></li>
+            <li class="list-group-item">Dislikes: <b class=text-danger>{{ total_dislikes }}</b></li>
+            <li class="list-group-item">Amount of States: <b>{{ total_articles }}</b></li>
+            <li class="list-group-item">Views: <b>{{ total_views }}</b></li>
+            <li class="list-group-item">Amount of comments: <b>{{ total_comments }}</b></li>
+        </ul>
+    </div>
+</div>
+<div class="row row-gap-4 mt-4">
+    {% for article in articles %}
+    <div class="col-4">
+        {% include './components/_card.html' %}
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

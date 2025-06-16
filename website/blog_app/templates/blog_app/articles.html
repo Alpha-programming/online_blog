@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %}
+States
+{% endblock %}
+
+{% block content %}
+<div class='row mt-5 mb-5'>
+    <div class='col-3'>
+        <ul class='list-group'>
+            {% for category in categories %}
+            <li class='list-group-item'>
+                <a href='?category={{ category.slug }}'>{{ category.name }}</a>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class='col-9'>
+        <div class="row row-gap-4">
+            {% for article in articles %}
+            <div class="col-4">
+                {% include './components/_card.html' %}
+            </div>
+            {% endfor %}
+        </div>
+        {% include 'components/_pagination.html' %}
+    </div>
+</div>
+{% endblock %}

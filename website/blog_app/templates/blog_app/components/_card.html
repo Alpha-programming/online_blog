@@ -1,0 +1,21 @@
+<div class="card">
+    {% if article.preview %}
+    <img src="{{ article.preview.url }}" class="card-img-top" alt="..." height="304">
+    {% else %}
+    <img src="https://stilsoft.ru/images/catalog/noup.png" class="card-img-top" alt="..." height="304">
+    {% endif %}
+
+    <div class="card-body">
+      <h5 class="card-title">{{ article.title }}</h5>
+      <p class="card-text">{{ article.short_description }}</p>
+    </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">Category: {{ article.category }}</li>
+      <li class="list-group-item">Author: {{ article.author }}</li>
+      <li class="list-group-item">Views: {{ article.views }}</li>
+      <li class="list-group-item">Created at: <br>{{ article.created_at }}</li>
+    </ul>
+    <div class="card-body">
+      <a href="{% url 'article_detail' article.slug %}" class="card-link">More</a>
+    </div>
+  </div>

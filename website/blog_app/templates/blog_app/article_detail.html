@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{{ artcile.title }}
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-6">
+        {% include './components/_article-gallery.html' %}
+    </div>
+    <div class="col-6">
+        <h2 class="text-center">{{ article.title }}</h2>
+        <ul class="list-group list-group">
+            <li class="list-group-item">Category: {{ article.category }}</li>
+            <li class="list-group-item">Author: {{ article.author }}</li>
+            <li class="list-group-item">Views: {{ article.views }}</li>
+            <li class="list-group-item">Created at: {{ article.created_at }}</li>
+            <li class="list-group-item">Likes: <span class="text-success">{{ total_likes }}</span></li>
+            <li class="list-group-item">Dislikes: <span class="text-danger">{{ total_dislikes }}</span></li>
+            <li class="list-group-item">Amount of comments: {{ total_comments }}</li>
+        </ul>
+
+        {% if request.user.is_authenticated and request.user != article.author %}
+        <div class="d-flex gap-3 mt-4">
+          <a href="{% url 'add_vote' article.pk 'add_like' %}" class="btn btn-success">Like</a>
+          <a href="{% url 'add_vote' article.pk 'add_dislike' %}" class="btn btn-danger">Dislike</a>
+        </div>
+        {% elif request.user.is_authenticated and request.user == article.author %}
+        <div class="d-flex gap-3 mt-4">
+          <a href="{% url 'update' article.slug %}" class="btn btn-warning">Change</a>
+          <a href="{% url 'delete' article.slug %}" class="btn btn-danger">Delete</a>
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+<div>
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+        {% if article.full_description %}
+        <li class="nav-item" role="presentation">
+          <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">Full description</button>
+        </li>
+        {% endif %}
+        <li class="nav-item" role="presentation">
+          <button class="nav-link {% if not article.full_description %}active{% endif %}" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Comments</button>
+        </li>
+
+      </ul>
+      <div class="tab-content" id="myTabContent">
+        {% if article.full_description %}
+        <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">{{ article.full_description }}</div>
+        {% endif %}
+        <div class="tab-pane py-4 fade {% if not article.full_description %}show active{% endif %}" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
+          {% for comment in comments %}
+          <div class="card mb-3">
+            <div class="card-header">
+              {{ comment.created_at }}
+            </div>
+            <div class="card-body">
+              <blockquote class="blockquote mb-0">
+                <p>{{ comment.text }}</p>
+                <footer class="blockquote-footer">
+                  {{ comment.author }}
+                </footer>
+              </blockquote>
+            </div>
+          </div>
+          {% endfor %}
+
+          <form method='post'>
+            {% csrf_token  %}
+
+            {{ form.as_p }}
+            <button class='mt-3 btn btn-dark'>Send</button>
+          </form>
+
+        </div>
+      </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section id="about" style="padding: 60px 0; background: #ffffff;">
+    <div style="max-width: 1000px; margin: auto; padding: 0 20px;">
+      <h2 style="text-align: center; font-size: 36px; margin-bottom: 10px;">About Us</h2>
+      <p style="text-align: center; margin-bottom: 50px; color: #666;">
+        Learn more about our mission, vision, and values.
+      </p>
+  
+      <div style="display: flex; flex-wrap: wrap; gap: 30px; align-items: center;">
+        
+        <!-- Image -->
+        <div style="flex: 1; min-width: 280px;">
+          <img src="/static/images/about-us.jpg" alt="About Us" style="width: 100%; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+        </div>
+  
+        <!-- Content -->
+        <div style="flex: 1; min-width: 280px;">
+          <h3 style="font-size: 28px; margin-bottom: 20px;">Who We Are</h3>
+          <p style="color: #555; line-height: 1.8;">
+            We are a passionate team dedicated to building innovative solutions that inspire and empower people around the world.
+            Our platform is designed to be user-friendly, effective, and impactful.
+          </p>
+          
+          <h3 style="font-size: 24px; margin-top: 30px;">Our Mission</h3>
+          <p style="color: #555; line-height: 1.8;">
+            To deliver high-quality services that drive real results and positive change for our clients and communities.
+          </p>
+  
+          <h3 style="font-size: 24px; margin-top: 30px;">Our Values</h3>
+          <ul style="color: #555; line-height: 1.8; list-style: disc; padding-left: 20px;">
+            <li>Integrity and honesty in all we do</li>
+            <li>Innovation and creativity</li>
+            <li>Customer-centric approach</li>
+            <li>Commitment to excellence</li>
+            <li>Collaboration and teamwork</li>
+          </ul>
+        </div>
+  
+      </div>
+    </div>
+  </section>
+  
+
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<form method='post'>
+    {% csrf_token %}
+    <p>
+        Do you really want to delete the state: <b>{{ article.title }}</b>
+    </p>
+    <input type="submit" class="btn btn-info" value='Yes, Delete'>
+    <a href="{{ article.get_absolute_url }}" class="btn btn-secondary">No</a>
+</form>
+{% endblock %}

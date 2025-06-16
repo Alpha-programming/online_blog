@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section id="contact" style="padding: 60px 0;">
+    <div style="max-width: 800px; margin: auto; padding: 0 20px;">
+      <h2 style="text-align: center; font-size: 36px; margin-bottom: 10px;">Contact Us</h2>
+      <p style="text-align: center; margin-bottom: 40px; color: #666;">Have a question? We'd love to hear from you!</p>
+  
+      <form method="POST" action="/contact/" style="display: flex; flex-direction: column; gap: 20px;">
+        {% csrf_token %}
+        
+        <!-- Name input -->
+        <div style="display: flex; flex-direction: column;">
+          <label for="id_name">Your Name</label>
+          <input type="text" name="name" id="id_name" placeholder="Enter your name" required style="padding: 10px; border: 1px solid #ccc; border-radius: 5px;">
+        </div>
+  
+        <!-- Email input -->
+        <div style="display: flex; flex-direction: column;">
+          <label for="id_email">Your Email</label>
+          <input type="email" name="email" id="id_email" placeholder="Enter your email" required style="padding: 10px; border: 1px solid #ccc; border-radius: 5px;">
+        </div>
+  
+        <!-- Subject input -->
+        <div style="display: flex; flex-direction: column;">
+          <label for="id_subject">Subject</label>
+          <input type="text" name="subject" id="id_subject" placeholder="Subject of your message" required style="padding: 10px; border: 1px solid #ccc; border-radius: 5px;">
+        </div>
+  
+        <!-- Message input -->
+        <div style="display: flex; flex-direction: column;">
+          <label for="id_message">Your Message</label>
+          <textarea name="message" id="id_message" rows="5" placeholder="Write your message here..." required style="padding: 10px; border: 1px solid #ccc; border-radius: 5px;"></textarea>
+        </div>
+  
+        <!-- Submit button -->
+        <button type="submit" style="background: #3498db; color: white; padding: 12px; font-size: 18px; border: none; border-radius: 5px; cursor: pointer;">
+          Send Message
+        </button>
+      </form>
+  
+      {% if messages %}
+        <ul style="margin-top: 20px;">
+          {% for message in messages %}
+            <li style="color: green;">{{ message }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    </div>
+  </section>
+  
+  
+  
+
+{% endblock %}

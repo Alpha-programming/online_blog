@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}
+API
+{% endblock %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <!-- Include Bootstrap or your custom CSS -->
+</head>
+<body>
+
+<h1>Welcome, {{ user.username }}</h1>
+
+<!-- Display user info, like API token -->
+<h3>Your API Token:</h3>
+<input type="text" value="{{ profile.api_token }}" readonly class="form-control">
+<a href="/api/get-token/" class="btn btn-primary mt-4">Generate New Token</a>
+
+</body>
+</html>
+
+
+
+{% endblock %}
